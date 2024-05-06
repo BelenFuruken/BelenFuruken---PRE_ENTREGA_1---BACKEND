@@ -1,0 +1,38 @@
+[
+	{
+		"id": 1,
+		"nombre": "TOMATE",
+		"descrip": "VERDULERIA",
+		"precio": 127,
+		"img": true,
+		"codigo": 123,
+		"cantidad": 27
+	},
+	{
+		"id": 2,
+		"nombre": "LECHUGA",
+		"descrip": "VERDULERIA",
+		"precio": 127,
+		"img": true,
+		"codigo": 111,
+		"cantidad": 4
+	},
+	{
+		"id": 3,
+		"nombre": "LIMON",
+		"descrip": "verduleria",
+		"precio": 546,
+		"img": true,
+		"codigo": 773,
+		"cantidad": 23
+	},
+	{
+		"id": 4,
+		"nombre": "LIMON",
+		"descrip": "verduleria",
+		"precio": 546,
+		"img": true,
+		"codigo": 777,
+		"cantidad": 23
+	}
+]
