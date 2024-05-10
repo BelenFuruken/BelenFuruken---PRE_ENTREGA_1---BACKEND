@@ -1,13 +1,13 @@
 const express = require("express")
 const router = express.Router()
-const ProductManager = require('../ProductManager.js')
+const ProductManager = require('../recursos/ProductManager.js')
 
-const test1 = new ProductManager(__dirname+"/src/Productos.json")
-//test1.addProduct('JAMON', 'FIAMBRE', 67, true, 222, 400)
+const test1 = new ProductManager()
 
 router.get("/", async (req, res) => {
     try{
         const allProducts = await test1.getProducts()
+        console.log(allProducts)
         if(req.query.limit){
             if(req.query.limit > allProducts.length){
                 res.send("Valor ingresado inexistente. No hay "+req.query.limit+" productos.")
@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     try{
-        const idParam = parseInt(req.params.id) //porque el parametro es string
+        const idParam = parseInt(req.params.id) 
         console.log(idParam)
         const exists = await test1.getProductById(idParam) 
         if(!exists.length>0){
@@ -33,18 +33,17 @@ router.get("/:id", async (req, res) => {
         }
         res.send(exists)
     }catch(error){
-        console.log("Ocurrió un error al actualizar los datos: " + error)
+        res.status(500).send("Ocurrió un error al actualizar los datos: " + error)
     }
 })
 
 router.post("/", async (req, res) => {
     try{
-        const {title, descrip, code, price, stock,thumbnails} = req.body
-        //console.log(title, descrip, code, price, stock,thumbnails)
-        let rta = await test1.addProduct(title, descrip, price, thumbnails, code, stock)
+        const {nombre, descrip, codigo, precio, cantidad,img} = req.body
+        let rta = await test1.addProduct(nombre, descrip, precio, img, codigo, cantidad)
         res.json({message: rta})
     }catch(error){
-        console.log("Ocurrió un error al actualizar los datos: " + error)
+        res.status(500).send("Ocurrió un error al actualizar los datos: " + error)
     }
 })
 
@@ -52,11 +51,10 @@ router.put('/:pid', async (req,res) => {
     try{
         const idUpdate = parseInt(req.params.pid)
         const {valor, campo} = req.body
-        //console.log(idUpdate, campo, valor)
         let rta = await test1.updateProduct(idUpdate, campo, valor)
         res.json({message: rta})    
     }catch(error){
-        console.log("Ocurrió un error al actualizar los datos: " + error)
+        res.status(500).send("Ocurrió un error al actualizar los datos: " + error)
     }
        
 })
@@ -67,7 +65,7 @@ router.delete('/:pid', async (req,res) => {
         let rta = await test1.deleteProduct(idDelete)
         res.json({message: rta}) 
     }catch(error){
-        console.log("Ocurrió un error al actualizar los datos: " + error)
+        res.status(500).send("Ocurrió un error al actualizar los datos: " + error)
     }    
 })
 

@@ -3,7 +3,7 @@
 		"id": 1,
 		"nombre": "TOMATE",
 		"descrip": "VERDULERIA",
-		"precio": 127,
+		"precio": 238888888,
 		"img": true,
 		"codigo": 123,
 		"cantidad": 27
@@ -27,12 +27,12 @@
 		"cantidad": 23
 	},
 	{
-		"id": 4,
-		"nombre": "LIMON",
-		"descrip": "verduleria",
-		"precio": 546,
+		"id": 5,
+		"nombre": "PEPINO",
+		"descrip": "VERDULERIA",
+		"precio": 1,
 		"img": true,
-		"codigo": 777,
-		"cantidad": 23
+		"codigo": 13423432,
+		"cantidad": 27
 	}
 ]

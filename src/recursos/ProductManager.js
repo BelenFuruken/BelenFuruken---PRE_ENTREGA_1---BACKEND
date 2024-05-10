@@ -1,9 +1,12 @@
+const { Console } = require('console')
+const { propfind } = require('../routes/products.router')
+
 const fs = require('fs').promises
 
 class ProductManager{
 
     constructor(){
-        this.path = "src/Productos.json"
+        this.path = "src/recursos/Productos.json"
     }
 
     async addProduct(title, description, price, thumbnail, code, stock){
@@ -33,19 +36,15 @@ class ProductManager{
                 return {message: "Producto agregado correctamente"}
             } 
         }catch(error){
-            console.log("Ocurrió un error al agregar el producto: " + error)
+            res.status(500).send("Ocurrió un error al agregar el producto: " + error)
         }     
     }
 
     async getProducts(){
         try {
-            //console.log("HOLA HASTA ACA SI LLEGUE")
             const products = await fs.readFile(this.path, 'utf-8')
-            //console.log("los productos son: ")
             if(products.length>0){
-                //console.log(products)
                 return JSON.parse(products)
-                //return products
             }
             return []
 
@@ -53,7 +52,7 @@ class ProductManager{
             if (error.code === 'ENOENT') {
                 return []
             } else {
-                throw error
+                res.status(500).send(error)
             }
         }
     }
@@ -71,8 +70,7 @@ class ProductManager{
             }
             return console.log("Todavía no hay nigún producto")
         }catch(error){
-            //console.log("Ocurrió un error al buscar el producto: " + error)
-            return error
+            res.status(500).send(error)
         }
     }
 
@@ -86,7 +84,7 @@ class ProductManager{
         await fs.writeFile(this.path, JSON.stringify(newList, null, "\t"))
         return {msg: "Producto eliminado correctamente"}
         }catch(eror){
-            console.log("Ocurrió un error al borrar el producto: " + idJoin)
+            res.status(500).send("Ocurrió un error al borrar el producto: " + idJoin)
         }
     }
 
@@ -102,7 +100,7 @@ class ProductManager{
         await fs.writeFile(this.path, JSON.stringify(products, null, "\t"))
         return {msg: "Producto actualizado correctamente"}
         }catch(error){
-            return{msg: "Ocurrió un error al actualizar los datos: " + error}
+            res.status(500).send({msg: "Ocurrió un error al actualizar los datos: " + error})
         }
     }
 }
