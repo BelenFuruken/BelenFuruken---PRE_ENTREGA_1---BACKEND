@@ -1,5 +1,6 @@
 const express = require("express")
 const ProductManager = require("../recursos/ProductManager.js")
+const { error } = require("console")
 const router = express.Router()
 const fs = require('fs').promises
 
@@ -14,7 +15,7 @@ router.post("/", async (req, res) => {
         if(carts.length>0){
             id = carts[carts.length - 1].idCarrito + 1
         }
-        carts.push({idCarrito:id, products:products})
+        carts.push({idCarrito:id, products:[products]})
         await fs.writeFile("src/recursos/Carritos.json", JSON.stringify(carts, null, "\t"))
         res.json({msg: "Carrito generado correctamente"})
     }catch(error){
@@ -46,15 +47,18 @@ router.post("/:cid/product/:pid", async (req, res) => {
         const cid = parseInt(req.params.cid)
         const pid = parseInt(req.params.pid)
         console.log(cid, pid)
-        let product = await test2.getProductById(pid)
-        console.log(product)
-        const stock = product[0].cantidad
-        console.log(stock)
         let carts = await fs.readFile("src/recursos/Carritos.json", 'utf-8')
         carts = JSON.parse(carts)
-        console.log(carts)
         let index = carts.findIndex(p=>p.idCarrito === cid)
-        console.log(carts[index])
+        if(index===-1){
+            return res.status(404).send("No existe el carrito seleccionado")
+        }
+        let product = await test2.getProductById(pid)
+        if(product = error){
+            return res.status(404).send("No existe el producto seleccionado")
+        }
+        const stock = product[0].cantidad
+        console.log("stock: "+stock)
         carts[index].productos.push({id: pid,stock: stock})
         await fs.writeFile("src/recursos/Carritos.json", JSON.stringify(carts, null, "\t"))
         res.json({msg: "Carrito generado correctamente"})

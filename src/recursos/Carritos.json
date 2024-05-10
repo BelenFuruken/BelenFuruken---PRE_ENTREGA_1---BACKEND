@@ -12,22 +12,14 @@
 				"cantidad": 27
 			},
 			{
-				"id": 1,
-				"stock": 27
-			},
-			{
-				"id": 3,
-				"stock": 23
-			},
-			{
-				"id": 3,
-				"stock": 23
+				"id": 2,
+				"stock": 4
 			}
 		]
 	},
 	{
 		"idCarrito": 2,
-		"products": [
+		"productos": [
 			{
 				"id": 1,
 				"nombre": "TOMATE",
@@ -63,31 +55,11 @@
 				"img": true,
 				"codigo": 777,
 				"cantidad": 23
+			},
+			{
+				"id": 2,
+				"stock": 4
 			}
 		]
-	},
-	{
-		"idCarrito": 3,
-		"products": {
-			"id": 1,
-			"nombre": "TOMATE",
-			"descrip": "VERDULERIA",
-			"precio": 127,
-			"img": true,
-			"codigo": 123,
-			"cantidad": 27
-		}
-	},
-	{
-		"idCarrito": 4,
-		"products": {
-			"id": 1,
-			"nombre": "PEPINO",
-			"descrip": "VERDULERIA",
-			"precio": 127,
-			"img": true,
-			"codigo": 123,
-			"cantidad": 27
-		}
 	}
 ]

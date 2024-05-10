@@ -1,4 +1,4 @@
-const { Console } = require('console')
+const { Console, error } = require('console')
 const { propfind } = require('../routes/products.router')
 
 const fs = require('fs').promises
@@ -62,10 +62,10 @@ class ProductManager{
             let products = await this.getProducts()
             if(products.length>0){
                 let productSearch = products.filter(p => p.id === idJoin)
-                if(productSearch.length>0){
-                    return productSearch
+                if(productSearch.length===0){
+                    return error
                 }else{
-                return error("No existe el producto")
+                    return productSearch
                 }
             }
             return console.log("Todavía no hay nigún producto")
